@@ -1,11 +1,17 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../components/Colors';
-import { SecondaryButton } from '../components/Button';
+import { SecondaryButton, SubscribeButton } from '../components/Button';
+import Collapsible from 'react-native-collapsible'
 
 const DetailsScreen = ({navigation, route}) => {
   const item = route.params;
+  const [collapsed, setCollapsed] = React.useState(true);
+
+  const toggleExpand=()=>{
+    setCollapsed(!collapsed)
+  }
 
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white}}>
@@ -30,20 +36,140 @@ const DetailsScreen = ({navigation, route}) => {
               alignItems: 'center',
             }}>
             <Text
-              style={{fontSize: 25, fontWeight: 'bold', color: COLORS.white}}>
+              style={{fontSize: 16, fontWeight: 'bold', color: 'black', maxWidth: 300, }} numberOfLines={1}>
               {item.name}
             </Text>
             <View style={style.iconContainer}>
               <Icon name="favorite-border" color={COLORS.primary} size={25} />
             </View>
           </View>
-          <Text style={style.detailsText}>
+          <Text style={style.detailsText}numberOfLines={4}>
             Rare eat Puff Puff Mix can be made into a deep-fried dough.
-            They are made from yeast dough,shaped into balls and deep-fried 
-            until golden brown. It has a doughnut-like texture but slightly...
+            They are made from yeast dough, shaped into balls and deep-fried 
+            until golden brown. It has a doughnut-like texture but slightly 
+            opaque.
           </Text>
-          <View style={{marginTop: 40, marginBottom: 40}}>
+          <TouchableOpacity
+            style={{
+              marginTop: 20,
+              borderBottomWidth: 0.3,
+              borderTopWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', marginTop: 5, marginBottom: 5,}}>Ingredients</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: 'black'}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+            <TouchableOpacity
+            style={{
+              marginTop: 5,
+              borderBottomWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, color: 'black', fontWeight: 'bold', marginTop: 5, marginBottom: 5,}}>Nutritional Information</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: 'black'}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+            <TouchableOpacity
+            style={{
+              marginTop: 5,
+              borderBottomWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', marginTop: 5, marginBottom: 5,}}>How to Prepare</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: 'black'}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+            <TouchableOpacity
+            style={{
+              marginTop: 5,
+              borderBottomWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', marginTop: 5, marginBottom: 5,}}>Dietary Information</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: 'black'}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+            <TouchableOpacity
+            style={{
+              marginTop: 5,
+              borderBottomWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', marginTop: 5, marginBottom: 5,}}>Storage Information</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: 'black'}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+
+            <TouchableOpacity
+            style={{
+              marginTop: 5,
+              borderBottomWidth: 0.3,
+            }}
+            onPress={toggleExpand}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: 'black', marginTop: 5, marginBottom: 5,}}>Extra</Text>
+
+            </TouchableOpacity>
+
+            <Collapsible collapsed={collapsed}>
+              <View
+                style={{
+                  marginTop: 30,
+                }}>
+                  <Text stylez={{fontSize: 12, color: COLORS.grey}}>They are made from yeast dough</Text>
+
+              </View>
+            </Collapsible>
+          <View style={{marginTop: 40, marginBottom: 15}}>
             <SecondaryButton title="Add To Cart" />
+          </View>
+          <View style={{marginTop: 5, marginBottom: 40}}>
+            <SubscribeButton title="Subscribe to a Plan" />
           </View>
         </View>
       </ScrollView>
@@ -62,7 +188,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 40,
     paddingBottom: 60,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.white,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
   },
@@ -77,8 +203,8 @@ const style = StyleSheet.create({
   detailsText: {
     marginTop: 10,
     lineHeight: 22,
-    fontSize: 16,
-    color: COLORS.white,
+    fontSize: 15,
+    color: 'black',
   },
 });
 

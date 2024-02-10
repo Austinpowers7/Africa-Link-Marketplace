@@ -20,6 +20,7 @@ import COLORS from '../components/Colors';
 import categories from '../components/Categories';
 import ShelfItems from '../components/ShelfItems';
 import {Ionicons} from'@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; 
 
 //Creating Width Dimension for the Menu Screen
 /*
@@ -33,7 +34,7 @@ const cardWidth = width / 2 - 20;
 
 const Menu = ({navigation}) => {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-
+  //const navigation = useNavigation
   //Extra feature added for categories above the item card
   const ListCategories = () => {
     return (
@@ -64,12 +65,13 @@ const Menu = ({navigation}) => {
                 style={{
                   fontSize: 15,
                   fontWeight: 'bold',
+                  maxWidth: 60,
                   marginLeft: 10,
                   color:
                     selectedCategoryIndex == index
                       ? COLORS.white
                       : COLORS.primary,
-                }}>
+                }} numberOfLines={1}>
                 {category.name}
               </Text>
             </View>
@@ -83,27 +85,28 @@ const Menu = ({navigation}) => {
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('DetailsScreen', ShelfItems)}>
+        onPress={() => navigation.navigate("DetailsScreen", ShelfItems)}>
         <View style={style.card}>
+        <Ionicons name="heart-outline" style={{marginTop: 10, marginRight: 10, alignSelf: 'flex-end'}} size={20} color={COLORS.dark} />
           <View style={{alignItems: 'center', top: 5}}>
             <Image source={ShelfItems.image} style={{height: 80, width: 80}} />
           </View>
-          <View style={{marginHorizontal: 20}}>
-            <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 2}}>{ShelfItems.name}</Text>
+          <View style={{marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', gap: 20}}>
+            <Text style={{fontSize: 14, fontWeight: 'bold', marginTop: 2, maxWidth: 110,}} numberOfLines={1}>{ShelfItems.name}</Text>
+            <Text style={{fontSize: 18, color: COLORS.primary}}>
+              ${ShelfItems.price}
+            </Text>
             <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
               {ShelfItems.ingredients}
             </Text>
           </View>
           <View
             style={{
-              marginTop: 10,
+              marginTop: 15,
               marginHorizontal: 20,
               flexDirection: 'row',
-              justifyContent: 'space-between',
+              justifyContent: 'center',
             }}>
-            <Text style={{fontSize: 18, color: COLORS.primary}}>
-              ${ShelfItems.price}
-            </Text>
             <View style={style.addToCartBtn}>
               <Ionicons name="cart-outline" size={20} color={COLORS.white} />
               <Text style={{fontSize: 12, color: COLORS.white}}>Add to cart</Text>
